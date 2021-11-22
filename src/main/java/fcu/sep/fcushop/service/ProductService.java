@@ -18,12 +18,14 @@ public class ProductService {
 
     }
 
-    public List<Product> getProducts() {
+    public List<Product> getProducts(String keyword) {
         try (Connection connection = sql2oDbHandler.getConnector().open()) {
             String query = "select ID id, NAME name, IMAGE_URL imageUrl, PRICE price, DESCRIPTION description"
-                    + " from PRODUCT";
+                    + " from PRODUCT where name like :keyword";
 
-            return connection.createQuery(query).executeAndFetch(Product.class);
+            return connection.createQuery(query)
+                    .addpar
+                    .executeAndFetch(Product.class);
         }
     }
 
